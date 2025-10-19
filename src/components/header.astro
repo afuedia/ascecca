@@ -1,60 +1,116 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
-import { languageList } from "../i18n/ui";
-const idioma = Astro.currentLocale || "es";
-const traducciones = useTranslations(idioma as keyof typeof languageList );
-import { useTranslations } from "../i18n/utils";
+import { Image } from "astro:assets"; 
+import logo from "../assets/logo.png"
 ---
 
 <header class="header">
-    <nav class="header__nav">
-        <ul class="header__ul">
-            <li class="header__li">
-                <a href={getRelativeLocaleUrl(idioma, "/")}>{traducciones("nav.home")}</a>
-            </li>
-            <li class="header__li">
-                <a class="active" href={getRelativeLocaleUrl(idioma, "/about")}>{traducciones("nav.about")}</a>
-            </li>
-            <li>
-                <details class="lang-select">
-                    <summary aria-haspopup="listbox" aria-expanded="false">
-                    🌐 {traducciones("nav.idioma")}
-                    </summary>
-                    <div class="lang-menu" role="listbox">
-                        {Object.entries(languageList).map(([key, label]: [string, string]) => {
-                         return <button data-value={key} role="option"><a href={`/${key}`}>{label}</a></button>
-                        })}
-                    </div>
-                </details>
-            </li>
-            
-            
+    <p class="header__p">ASCCECA</p>
+
+    <!-- <Image class="logo" src={logo} alt="logo de ascecca" /> -->
+
+<label for="icono" aria-label="Abrir menú">
+        <svg
+          class="header__icono header__icono--hamburguesa"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Menú</title>
+          <rect x="3" y="5" width="18" height="2" rx="1" fill="currentColor" />
+          <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
+          <rect x="3" y="17" width="18" height="2" rx="1" fill="currentColor" />
+        </svg>
+      </label>
+      <input id="icono" class="header__check" type="checkbox" />
+      <!-- Barra navegacion -->
+      <nav class="nav">
+        <label for="icono" aria-label="cerrar menú">
+        <svg class="nav__icono" viewBox="0 0 24 24" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Cerrar</title>
+  <rect x="5.2" y="11" width="13.6" height="2" rx="1" fill="currentColor" transform="rotate(45 12 12)"/>
+  <rect x="5.2" y="11" width="13.6" height="2" rx="1" fill="currentColor" transform="rotate(-45 12 12)"/>
+</svg>
+
+      </label>
+        <ul class="nav__ul">
+          <li><a href="/">Home</a></li>
+          <li><a href="dos.html">¿Quienes somos?</a></li>
         </ul>
-    </nav>
+      </nav>
+
+
+   
+    <!-- <button>Iniciar sesión</button> -->
 </header>
 
-    <style>
-      .header {
-  background-color: #8b008b;
-  color: #f9f9f9;
+<style>
+     
+  .header {
   display: flex;
-  flex-direction: row;
-  justify-content: end;
-}
-.header__ul {
-  display: flex;
-  color: #f9f9f9;
-  gap: 1rem;
-  margin-right: 3rem;
+  justify-content: space-between;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  height: var(--espacio-xxxl);
+ 
+  }
+ .header__p {
+    height: 100%;
+    width: 4rem;
+    display: flex;
+    padding: 1rem;
+    text-align: center;
+    align-items: center;
+  }
+  
+ .header__icono {
+  height: 100%;
+  width: 4rem;
+  padding: 1rem;
+  
+  }
+ 
+  .header__check {
+    display: none;
+  }
+
+
+.nav {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--color-principal);
+  
+  .nav__icono {
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .nav__ul {
+    margin-top: 4rem;
+    li {
+      margin: var(--espacio-s);
+      padding: var(--espacio-m);
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+      margin: var(--espacio-m);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 
 }
 
-.header__li {
-  list-style: none;
-  a {
-  color: #f9f9f9;
-  font-family: "Playfair Display";
-  font-family: "Playfair Display";
-  text-decoration: none;
-}}
+.header__check:checked + nav {
+  display: block;
+}
     </style>

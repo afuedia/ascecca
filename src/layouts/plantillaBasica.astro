@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro"
 import Footer from "../components/footer.astro";
+import Header from "../components/header.astro";
 import "../styles/reset.css"
 import "../styles/variables.css"
 const idioma = Astro.currentLocale || "es";
@@ -11,6 +12,7 @@ const { titulo, descripcion } = Astro.props;
 <html lang={idioma}>
   <BaseHead title={titulo} description={descripcion} />
   <body>
+    <Header />
     <slot />
     <Footer />
     </body>
