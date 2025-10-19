@@ -15,12 +15,12 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -31,8 +31,11 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.18.3   # 👈 tu versión
+          version: 10.18.3   # tu versión
           run_install: false
+
+      - name: Verify pnpm
+        run: pnpm --version
 
       - name: Install deps
         run: pnpm install --frozen-lockfile
@@ -46,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist       # Astro compila a dist
+          path: ./dist
 
   deploy:
     needs: build
