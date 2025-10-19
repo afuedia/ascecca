@@ -1,27 +1,8 @@
 @font-face {
-    font-family: 'Playfair Display';
-    src: url('fonts/PlayfairDisplay-Regular.woff2') format('woff2'),
-        url('fonts/PlayfairDisplay-Regular.woff') format('woff');
-    font-weight: normal;
+    font-family: 'Bricolage Grotesque 96pt';
+    src: url('/fonts/BricolageGrotesque-96ptExtraBold.woff2') format('woff2'),
+        url('/fonts/BricolageGrotesque-96ptExtraBold.woff') format('woff');
+    font-weight: 200 900;
     font-style: normal;
     font-display: swap;
 }
-
-@font-face {
-    font-family: 'Nunito';
-    src: url('fonts/subset-Nunito-ExtraLight.woff2') format('woff2'),
-        url('fonts/subset-Nunito-ExtraLight.woff') format('woff');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Fira Code';
-    src: url('fonts/subset-FiraCode-Light.woff2') format('woff2'),
-        url('fonts/subset-FiraCode-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
