@@ -1,0 +1,21 @@
+---
+const idioma = Astro.currentLocale || "es";
+const traducciones = useTranslations(idioma as keyof typeof languageList );
+import { useTranslations } from "../i18n/utils";
+---
+<footer class="footer">
+      <p>{traducciones("footer.p")}</p>
+</footer>
+
+<style>
+  .footer {
+  background-color: var(--color-principal);
+  color: var(--color-background); 
+  height: 10rem;
+  width: 100%;
+  display: flex;
+  p {
+    margin: auto;
+  }
+}
+</style>

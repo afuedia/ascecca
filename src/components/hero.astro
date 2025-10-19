@@ -1,0 +1,174 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Calendario from "./calendario/Calendario.astro"
+const idioma = Astro.currentLocale || "es";
+const traducciones = useTranslations(idioma as keyof typeof languageList );
+import { useTranslations } from "../i18n/utils";
+---
+    
+<div class="hero">
+  <hgroup class="hero__hgroup">
+    <h1><span>{traducciones("hero.h1")}</span> <time id="hoy-es-si"></time></h1>
+    <p>{traducciones("hero.hgroup--p")}</p>
+    <cite>{traducciones("hero.cite")}</cite>
+  </hgroup>
+  
+  <div class="hero__textos">
+      <p>{traducciones("hero.text--1")}</p>
+      <p>{traducciones("hero.text--2")}</p>
+      
+  </div> 
+  <a class="hero__a" href={getRelativeLocaleUrl(idioma, "/about")}>{traducciones("hero.a")}</a>          
+</div>
+<Calendario />
+
+
+
+
+<style>
+  .hero {
+    /* 📱 Estilos base: móvil (≤600px) */
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+
+
+    /* 📲 Tablet: 601px – 1024px */
+    @media (min-width: 601px) and (max-width: 1024px) {
+    } 
+    /* 💻 Desktop: ≥1025px */
+    @media (min-width: 1025px) {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .hero__hgroup {
+    margin-bottom: 1rem;
+    span {
+      display: block;
+      font-size: 1rem;
+    }
+    cite {
+      font-size: 2rem;
+    }
+  }
+
+  .hero__a {
+    background-color: #eb5d1e;
+    display: inline-block;
+    text-align: center;
+    text-justify: center;
+    color: #f9f9f9;
+    font-family: "Playfair Display";
+    text-decoration: none;
+    border-radius: 25px;
+    margin-top: 3rem;
+    justify-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+
+
+
+#hoy-es-no {
+  text-decoration: line-through;
+}
+
+#hoy-es-si {
+  font-size: 2rem;
+}
+
+.hoy-es-si p {
+  font-size: 1rem;
+}
+
+
+
+</style>
+
+<script is:inline>
+  // --- funciones puras (sin tocar el DOM) ---
+  function calcularDiaOrdinal(fecha) {
+    const diaUno = new Date(fecha.getFullYear(), 0, 1);
+    return Math.floor((fecha - diaUno) / (1000 * 60 * 60 * 24)) + 1;
+  }
+  function esBisiesto(año) {
+    return (año % 4 === 0 && año % 100 !== 0) || año % 400 === 0;
+  }
+  function construirTextoFecha() {
+    const hoy = new Date();
+    const año = hoy.getFullYear();
+    const diaOrdinal = calcularDiaOrdinal(hoy);
+    const diaOrdinalB = diaOrdinal - 1;
+
+    let nums = esBisiesto(año)
+      ? [0,31,61,91,122,152,183,214,244,274,305,335,366]
+      : [0,31,61,91,122,152,182,213,243,273,304,334,365];
+
+    let inicioMes = 0;
+    function obtenerMes(d) {
+      for (let i = 1; i < nums.length; i++) {
+        if (d > nums[i-1] && d <= nums[i]) {
+          inicioMes = nums[i-1];
+          return i;
+        }
+      }
+      return 1;
+    }
+
+    const dias = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+    const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+    const mesNombre = meses[obtenerMes(diaOrdinal) - 1];
+    const diaMes = diaOrdinal - inicioMes;
+    const diaSemana = dias[(diaOrdinal - 1) % 7];
+    const diaSemanaB = dias[(diaOrdinalB - 1) % 7];
+
+    if (esBisiesto(año)) {
+      if (diaOrdinal < 183) return `${diaSemana} ${diaMes} de ${mesNombre} de ${año}`;
+      if (diaOrdinal === 183) return `el día del Año Bisiesto de ${año}`;
+      if (diaOrdinal > 183 && diaOrdinal < 366) return `${diaSemanaB} ${diaMes} de ${mesNombre} de ${año}`;
+      if (diaOrdinal === 366) return `el día del Mundo de ${año}`;
+    } else {
+      if (diaOrdinal === 365) return `el día del Mundo de ${año}`;
+      return `${diaSemana} ${diaMes} de ${mesNombre} de ${año}`;
+    }
+    return "";
+  }
+
+  // --- init/cleanup ligados al router ---
+  function initFecha() {
+    const el = document.getElementById("hoy-es-si");
+    if (!el) return;
+    // evita doble init si vuelves a esta página
+    if (el.dataset.bound === "true") return;
+    el.dataset.bound = "true";
+    el.textContent = construirTextoFecha();
+  }
+
+  function cleanupFecha() {
+    const el = document.getElementById("hoy-es-si");
+    if (!el) return;
+    delete el.dataset.bound;
+  }
+
+  // eventos del ClientRouter (View Transitions)
+  document.addEventListener("astro:page-load", initFecha);
+  document.addEventListener("astro:after-swap", initFecha);
+  document.addEventListener("astro:before-swap", cleanupFecha);
+
+  // opcional si no usamos ClientRouter
+  // document.addEventListener("DOMContentLoaded", initFecha)
+</script>

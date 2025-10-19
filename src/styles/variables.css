@@ -1,0 +1,39 @@
+:root {
+  /* Tipografía */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Nunito", sans-serif;
+  --font-code: "Fira Code", monospace;
+
+  /* Tamaños base */
+  --font-size-base: 16px;
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.5rem;
+
+  /* Colores */
+  --color-principal: #000; 
+  --color-complementario: #9ACEFF; /* azul canario para botones y acentos */
+  --color-background: #f5f5f5; /* fondo neutro de la web */
+  --color-text: #333333; /* texto principal */
+  
+  
+
+  /* Espaciados */
+  --factor: 1.618;
+
+  --espacio-xs: calc(1rem / var(--factor) / var(--factor));
+  --espacio-s: calc(1rem / var(--factor));
+  --espacio-m: 1rem;
+  --espacio-l: calc(1rem * var(--factor));
+  --espacio-xl: calc(1rem * var(--factor) * var(--factor));
+  --espacio-xxxl: calc(
+    1rem * var(--factor) * var(--factor) * var(--factor) * var(--factor)
+  );
+}
+
+/* Variables cuando input está check */
+
+:root:has(#modoOscuro:checked) {
+  --color-background: #333333;
+  --color-text: #f5f5f5;
+}

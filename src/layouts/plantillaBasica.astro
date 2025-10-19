@@ -1,0 +1,16 @@
+---
+import BaseHead from "../components/BaseHead.astro"
+import "../styles/global.css"
+import "../styles/variables.css"
+const idioma = Astro.currentLocale || "es";
+const { titulo, descripcion } = Astro.props;
+---
+<!DOCTYPE html>
+  
+<html lang={idioma}>
+  <BaseHead title={titulo} description={descripcion} />
+  <body>
+    <slot />
+    </body>
+</html>
+

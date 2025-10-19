@@ -1,0 +1,60 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "../i18n/ui";
+const idioma = Astro.currentLocale || "es";
+const traducciones = useTranslations(idioma as keyof typeof languageList );
+import { useTranslations } from "../i18n/utils";
+---
+
+<header class="header">
+    <nav class="header__nav">
+        <ul class="header__ul">
+            <li class="header__li">
+                <a href={getRelativeLocaleUrl(idioma, "/")}>{traducciones("nav.home")}</a>
+            </li>
+            <li class="header__li">
+                <a class="active" href={getRelativeLocaleUrl(idioma, "/about")}>{traducciones("nav.about")}</a>
+            </li>
+            <li>
+                <details class="lang-select">
+                    <summary aria-haspopup="listbox" aria-expanded="false">
+                    🌐 {traducciones("nav.idioma")}
+                    </summary>
+                    <div class="lang-menu" role="listbox">
+                        {Object.entries(languageList).map(([key, label]: [string, string]) => {
+                         return <button data-value={key} role="option"><a href={`/${key}`}>{label}</a></button>
+                        })}
+                    </div>
+                </details>
+            </li>
+            
+            
+        </ul>
+    </nav>
+</header>
+
+    <style>
+      .header {
+  background-color: #8b008b;
+  color: #f9f9f9;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.header__ul {
+  display: flex;
+  color: #f9f9f9;
+  gap: 1rem;
+  margin-right: 3rem;
+
+}
+
+.header__li {
+  list-style: none;
+  a {
+  color: #f9f9f9;
+  font-family: "Playfair Display";
+  font-family: "Playfair Display";
+  text-decoration: none;
+}}
+    </style>

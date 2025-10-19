@@ -1,0 +1,42 @@
+---
+const idioma = Astro.currentLocale || "es";
+import { useTranslations } from "../../i18n/utils";
+const traducciones = useTranslations(idioma as keyof typeof languageList );
+---
+
+<thead>
+  <tr class="semana-chico">
+    <th class="dia-semana-chico">
+      <abbr title={traducciones("dia.uno")[0]}>{traducciones("dia.uno")[1]}</abbr>
+    </th>
+    <th class="dia-semana-chico">
+      <abbr title={traducciones("dia.dos")[0]}>{traducciones("dia.dos")[1]}</abbr>
+    </th>
+    <th class="dia-semana-chico">
+      <abbr title={traducciones("dia.tres")[0]}>{traducciones("dia.tres")[1]}</abbr>
+    </th>
+    <th class="dia-semana-chico">
+      <abbr title={traducciones("dia.cuatro")[0]}>{traducciones("dia.cuatro")[1]}</abbr>
+    </th>
+    <th class="dia-semana-chico">
+      <abbr title={traducciones("dia.cinco")[0]}>{traducciones("dia.cinco")[1]}</abbr>
+    </th>
+    <th class="dia-semana-chico">
+      <abbr title={traducciones("dia.seis")[0]}>{traducciones("dia.seis")[1]}</abbr>
+    </th>
+    <th class="dia-semana-chico">
+      <abbr title={traducciones("dia.siete")[0]}>{traducciones("dia.siete")[1]}</abbr>
+    </th>
+  </tr>
+</thead>
+
+
+<style>
+  thead {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  abbr {
+    text-decoration: none;
+  }
+</style>
