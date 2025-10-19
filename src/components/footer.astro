@@ -1,10 +1,9 @@
 ---
-const idioma = Astro.currentLocale || "es";
-const traducciones = useTranslations(idioma as keyof typeof languageList );
-import { useTranslations } from "../i18n/utils";
 ---
+
 <footer class="footer">
-      <p>{traducciones("footer.p")}</p>
+  <p>© ASCECCA 2025</p>
+  <p>Hecho con 🚀Astro</p>
 </footer>
 
 <style>
@@ -14,6 +13,7 @@ import { useTranslations } from "../i18n/utils";
   height: 10rem;
   width: 100%;
   display: flex;
+  flex-direction: column;
   p {
     margin: auto;
   }
