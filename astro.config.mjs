@@ -3,9 +3,12 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ascecca.com/", //poner aquí el dominio
+  site: 'https://afuedia.github.io', //poner aquí el dominio
+  base: 'ascecca',
   image: {
     responsiveStyles: true,        
     layout: 'constrained'
   },
+  
+  
 });
