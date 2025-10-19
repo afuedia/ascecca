@@ -1,31 +1,52 @@
-name: Deploy to GitHub Pages
+# .github/workflows/deploy.yml
+name: Deploy Astro to GitHub Pages
 
 on:
-  # Activa el flujo de trabajo cada vez que hagas push a la rama `main`
-  # Usando un nombre de rama diferente? Reemplaza `main` con el nombre de tu rama
   push:
-    branches: [ main ]
-  # Te permite ejecutar este flujo de trabajo manualmente desde la pestaña Acciones en GitHub.
+    branches: [ main ]     # cámbialo si usas otra rama
   workflow_dispatch:
 
-# Permite que este trabajo clone el repositorio y cree un despliegue de página
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
-        # with:
-          # path: . # La ubicación raíz de tu proyecto de Astro dentro del repositorio. (opcional)
-          # node-version: 20 # La versión específica de Node que debería usarse para construir tu sitio. Por defecto es 20. (opcional)
-          # package-manager: pnpm@latest # El gestor de paquetes de Node que debería usarse para instalar dependencias y construir tu sitio. Detectado automáticamente basado en tu lockfile. (opcional)
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.18.3   # 👈 tu versión
+          run_install: false
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist       # Astro compila a dist
 
   deploy:
     needs: build
