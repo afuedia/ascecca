@@ -9,7 +9,7 @@ import logo from "../assets/logo.png"
     <!-- <Image class="logo" src={logo} alt="logo de ascecca" /> -->
 
 <label for="icono" aria-label="Abrir menú">
-        <svg
+    <svg
           class="header__icono header__icono--hamburguesa"
           viewBox="0 0 24 24"
           width="24"
@@ -21,11 +21,11 @@ import logo from "../assets/logo.png"
           <rect x="3" y="5" width="18" height="2" rx="1" fill="currentColor" />
           <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
           <rect x="3" y="17" width="18" height="2" rx="1" fill="currentColor" />
-        </svg>
-      </label>
-      <input id="icono" class="header__check" type="checkbox" />
+    </svg>
+</label>
+<input id="icono" class="header__check" type="checkbox" />
       <!-- Barra navegacion -->
-      <nav class="nav">
+<nav class="nav">
         <label for="icono" aria-label="cerrar menú">
         <svg class="nav__icono" viewBox="0 0 24 24" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg">
   <title>Cerrar</title>
@@ -38,24 +38,30 @@ import logo from "../assets/logo.png"
           <li><a href="/">Home</a></li>
           <li><a href="dos.html">¿Quienes somos?</a></li>
         </ul>
-      </nav>
+</nav>
 
-
+<nav class="nav--escritorio">
+   <ul class="nav__ul">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">¿Quienes somos?</a></li>
+    </ul> 
+</nav>
    
-    <!-- <button>Iniciar sesión</button> -->
+<button>Iniciar sesión</button>
 </header>
 
 <style>
-     
-  .header {
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  height: var(--espacio-xxxl);
- 
-  }
- .header__p {
+   
+.header {
+display: flex;
+justify-content: space-between;
+
+color: var(--color-text);
+height: var(--espacio-xl);
+margin: 1rem;
+}
+
+.header__p {
     height: 100%;
     width: 4rem;
     display: flex;
@@ -67,9 +73,15 @@ import logo from "../assets/logo.png"
  .header__icono {
   height: 100%;
   width: 4rem;
-  padding: 1rem;
   
-  }
+  /* 📲 Tablet: 601px – 1024px */
+    @media (min-width: 601px) and (max-width: 1024px) {
+    } 
+    /* 💻 Desktop: ≥1025px */
+    @media (min-width: 1025px) {
+      display: none
+    }
+}
  
   .header__check {
     display: none;
@@ -107,10 +119,43 @@ import logo from "../assets/logo.png"
       }
     }
   }
-
+  
 }
-
+.nav--escritorio {
+ display: none;
+ /* 💻 Desktop: ≥1025px */
+ @media (min-width: 1025px) {
+   display: flex;
+   
+   ul {
+     display: flex;
+     gap: 1rem;
+     align-items: center;
+     li {
+         padding-inline: 1rem;
+         a {
+             text-decoration: none;
+             color: inherit;
+         }
+     }
+   }
+ }
+}
 .header__check:checked + nav {
   display: block;
+}
+button {
+    display: none;
+    @media (min-width: 1025px) {
+    display: flex;
+    background-color: var(--color-principal);
+    color: var(--color-background);
+    align-items: center;
+    text-align: center;
+    text-justify: center;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    justify-self: center;
+    padding: 10px 20px;}
 }
     </style>
