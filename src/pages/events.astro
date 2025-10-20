@@ -1,0 +1,44 @@
+---
+import PlantillaBasica from "../layouts/plantillaBasica.astro"
+import EventsCard from "../components/EventsCard.astro"
+import Cerveza from "../assets/images.jpg"
+---
+
+<PlantillaBasica >
+
+<h1>Eventos</h1>
+<section>
+  <hgroup>
+    <h2>Próximos eventos</h2>
+    <p>
+      Reserva la fecha y participa con nosotros en estos próximos eventos.
+    </p>
+  </hgroup>
+  <div>
+    <EventsCard src={Cerveza}  titulo="Encuentro en Tenerife" fecha="25 de octubre", ubicacion="La Laguna", descripcion="Encuentro anual en Tenerife dónde podremos compartir nuestra cerveza"/>
+    <EventsCard src={Cerveza}  titulo="" fecha="25 de octubre", ubicacion="La Laguna", descripcion="Encuentro anual en Tenerife dónde podremos compartir nuestra cerveza"/>
+    <EventsCard src={Cerveza}  titulo="" fecha="25 de octubre", ubicacion="La Laguna", descripcion="Encuentro anual en Tenerife dónde podremos compartir nuestra cerveza"/>
+    <EventsCard src={Cerveza}  titulo="" fecha="25 de octubre", ubicacion="La Laguna", descripcion="Encuentro anual en Tenerife dónde podremos compartir nuestra cerveza"/>
+    <EventsCard src={Cerveza}  titulo="" fecha="25 de octubre", ubicacion="La Laguna", descripcion="Encuentro anual en Tenerife dónde podremos compartir nuestra cerveza"/>
+    <EventsCard src={Cerveza}  titulo="" fecha="25 de octubre", ubicacion="La Laguna", descripcion="Encuentro anual en Tenerife dónde podremos compartir nuestra cerveza"/>
+  </div>
+</section>
+
+<section>
+<hgroup>
+  <h2>Eventos pasados</h2>
+	<p>Echa un vistazo a nuestros últimos eventos</p>
+</hgroup>
+</section>
+
+</PlantillaBasica>	
+
+<style>
+ div {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 3rem;
+  gap: 1rem;
+  justify-content: center;
+ }
+</style>

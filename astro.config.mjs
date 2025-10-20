@@ -5,4 +5,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://afuedia.github.io',
   base: '/ascecca',
+  image: {
+    responsiveStyles: true,        
+    layout: 'constrained'
+  },
+
 });
