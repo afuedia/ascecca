@@ -1,0 +1,56 @@
+---
+import PlantillaBasica from "../layouts/plantillaBasica.astro"
+const Base = import.meta.env.BASE_URL; // => '/ascecca/'
+---
+
+<PlantillaBasica>
+  
+  <section>
+
+    <hgroup>
+      <h1>404</h1>
+      <p>No hay cerveza aquí</p>
+      <a class="hero__a" href=`${Base}`>Volver</a>
+    </hgroup>
+  </section>
+  
+</PlantillaBasica>	
+
+<style>
+  section {
+    display: flex;
+    width: 100%;
+    margin: auto;
+  }
+  hgroup {
+    max-width: 66%;
+    margin: auto;
+    text-align: center;
+  }
+  h1 {
+    font-size: 6rem;
+  }
+  p {
+    font-size: 2rem;
+  }
+  .hero__a {
+    background-color: var(--color-principal);
+    color: var(--color-background);
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    text-justify: center;
+    font-family: "Playfair Display";
+    text-decoration: none;
+    border-radius: 0.25rem;
+    margin-top: 3rem;
+    justify-self: center;
+    
+    padding: 10px 20px;
+    @media (min-width: 601px) and (max-width: 1024px) {
+      } 
+    /* 💻 Desktop: ≥1025px */
+    @media (min-width: 1025px) {
+      }
+  }
+</style>

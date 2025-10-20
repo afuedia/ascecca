@@ -24,7 +24,7 @@ import logo from "../assets/logo.png"
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
 
@@ -42,6 +42,7 @@ import logo from "../assets/logo.png"
   div {
     display: flex;
     flex-direction: column;
+    max-width: 50%;
   }
   .hero__hgroup {
     margin-bottom: 1rem;
@@ -74,7 +75,8 @@ import logo from "../assets/logo.png"
     } 
     /* 💻 Desktop: ≥1025px */
     @media (min-width: 1025px) {
-      max-width: 33%;
+      min-width: 33%;
+      max-width: 66%;
       
     }
   }
@@ -84,6 +86,7 @@ import logo from "../assets/logo.png"
     /* 📲 Tablet: 601px – 1024px */
     
     @media (min-width: 1025px) {
+      margin: auto;
       display: block;
     }
   }
