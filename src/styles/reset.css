@@ -20,6 +20,8 @@ p {
 ul,
 ol {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* 5. Hace que las imágenes se adapten al ancho del contenedor */
