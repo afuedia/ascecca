@@ -6,5 +6,58 @@ import Hero from "../components/hero.astro"
 <PlantillaBasica>
 
 	<Hero />
-	
+	<section>
+		
+		
+		<h2>Empieza a elaborar</h2>
+		<p>Visita nuestra guía para saber todo lo que necesitas para hacer cerveza en casa</p>
+		<a href="">Guia de elaboración</a>
+	</section>
 </PlantillaBasica>	
+
+<style>
+	section {
+		margin: auto;
+		max-width: 90%;
+		background-color: var(--color-principal);
+		color: var(--color-background);
+		border-radius: 0.5rem;
+		display: flex;
+    flex-direction: column;
+		gap: 1rem;
+		padding: 1rem;
+		margin-block: 3rem;
+    @media (min-width: 601px) and (max-width: 1024px) {
+      max-width: 75%;
+    } 
+    @media (min-width: 1025px) {
+      max-width: 50%;
+    }
+	}
+
+	a {
+		margin: auto;
+		color: var(--color-principal);
+    background-color: var(--color-background);
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+    text-justify: center;
+    font-family: "Playfair Display";
+    text-decoration: none;
+    border-radius: 0.25rem;
+    margin-top: 3rem;
+    justify-self: center;
+    
+    padding: 10px 20px;
+    @media (min-width: 601px) and (max-width: 1024px) {
+      max-width: 33%;
+    } 
+    /* 💻 Desktop: ≥1025px */
+    @media (min-width: 1025px) {
+      min-width: 33%;
+      max-width: 66%;
+      
+    }
+	}
+</style>

@@ -1,0 +1,22 @@
+---
+import PlantillaBasica from "../layouts/plantillaBasica.astro"
+import Hero from "../components/hero.astro"
+const titulo = "Sobre la Asociación Canaria de Cerveceros Caseros";
+const descripcion = "Conoce la comunidad canaria de homebrewers: aprendemos, compartimos y disfrutamos la cerveza casera con talleres, guías y eventos por islas."
+---
+
+<PlantillaBasica titulo={titulo} descripcion={descripcion}>
+
+	<section>
+    <hgroup>
+      <h1>Aprender • Compartir • Disfrutar</h1>
+      <p>Cerveza hecha en casa</p>
+    </hgroup>
+    <p>
+      Somos una asociación sin ánimo de lucro que impulsa el <strong>homebrewing en Canarias</strong>.
+      Organizamos <strong>talleres</strong>, compartimos <strong>recursos</strong> y creamos
+      <strong>comunidad por islas</strong> para que cualquier persona pueda elaborar cerveza casera
+      con confianza —desde su primera receta hasta estilos avanzados.
+    </p>
+	</section>
+</PlantillaBasica>	
