@@ -17,3 +17,6 @@ El proyecto ha sido desarrollado utilizando Astro 🚀
 
 ## Rendimiento
 
+## SEO & Content
+
+
