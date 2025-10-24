@@ -8,19 +8,31 @@ const height = "auto"
   <Picture src={src} alt={alt} formats={['avif', 'webp']} class="imagen"/>
   <div>
     <p>{año}</p>
-    <h2>{estilo}</h2>
+    <h1>{estilo}</h1>
+    
     <a href="">Bases</a>
   </div>
 </section>
 
 <style>
   section {
+    display: flex;
+    flex-direction: column;
+    @media (601px <= width <= 1024px) {
+      flex-direction: row;
+    } 
+    @media (width >= 1025px) {
+      max-height: 80vh;
+      flex-direction: row;
+    }
+
     .imagen {
       max-height: 100%;
     }
-    display: flex;
     
-    max-height: 75vh;
+    
+    
+    
     div {
       min-width: 30%;
       text-align:  start;

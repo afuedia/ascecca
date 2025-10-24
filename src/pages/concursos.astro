@@ -10,9 +10,11 @@ import california from "../assets/california169.png"
 <!-- const {src, alt, titulo, fecha, ubicacion, descripcion } = Astro.props; -->
  <!-- const { src, alt, año, estilo} -->
 <PlantillaBasica titulo={titulo} descripcion={descripcion}>
-  <h1>IX Concurso</h1>
-  <HeroConcurso src={california} alt="imagen bonita" año="2025" estilo="California Common" />
-
+  <!-- <h1>IX Concurso</h1> -->
+  <HeroConcurso src={california} alt="imagen bonita" año="2025" estilo="IX Concurso: California Common" />
+  <section>
+    <h2>Antiguos concursos</h2>
+  </section>
   
   
 
@@ -26,3 +28,9 @@ import california from "../assets/california169.png"
   <h2>2017</h2>
   <h2>2016</h2> -->
 </PlantillaBasica>
+
+<style>
+  section {
+    margin-block: 4rem;
+  }
+</style>
