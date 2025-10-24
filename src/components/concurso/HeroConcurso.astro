@@ -1,0 +1,33 @@
+---
+import { Picture } from "astro:assets";
+const { src, alt, año, estilo} = Astro.props;
+const height = "auto"
+---
+
+<section>
+  <Picture src={src} alt={alt} formats={['avif', 'webp']} class="imagen"/>
+  <div>
+    <p>{año}</p>
+    <h2>{estilo}</h2>
+    <a href="">Bases</a>
+  </div>
+</section>
+
+<style>
+  section {
+    .imagen {
+      max-height: 100%;
+    }
+    display: flex;
+    
+    max-height: 75vh;
+    div {
+      min-width: 30%;
+      text-align:  start;
+      padding: 1rem;
+    }
+
+    
+
+  }
+</style>

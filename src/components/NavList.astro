@@ -1,0 +1,11 @@
+---
+const Base = import.meta.env.BASE_URL; // => '/ascecca'
+const { clase } = Astro.props;
+---
+
+<ul class={clase}>
+  <li><a href=`${Base}`>Inicio</a></li>
+  <li><a href=`${Base}/about`>¿Quienes somos?</a></li>
+  <li><a href=`${Base}/events`>Actividades</a></li>
+  <li><a href=`${Base}/concursos`>Concursos</a></li>
+</ul>
