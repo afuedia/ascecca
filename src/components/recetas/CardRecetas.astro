@@ -1,0 +1,202 @@
+---
+import { getCollection } from "astro:content";
+const recetas = await getCollection("recetas");
+const Base = import.meta.env.BASE_URL;
+---
+
+
+  {
+    recetas.map((receta) => {
+      const { slug, data } = receta;
+      const { estilo, autor, logro, fermentables = {}, lupulos = [], levadura } = data;
+
+      const maltas = fermentables?.maltas ?? [];
+      const adjuntos = fermentables?.adjuntos ?? [];
+
+      const lev =
+        typeof levadura === "object" && levadura !== null
+          ? levadura
+          : { nombre: String(levadura ?? ""), cantidad: null, unidad: "g" };
+
+      const dlgId = `dlg-${slug}`;
+      const openId = `open-${slug}`;
+
+      return (
+        <article class="receta-card rounded-2xl border p-4 shadow-sm bg-white/80">
+          <header class="flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <h2 class="text-xl font-semibold truncate">{estilo}</h2>
+              <p class="text-sm opacity-80">
+                {logro && <><em>{logro}</em> · </>}
+                Autor: {autor}
+              </p>
+            </div>
+            <button
+              class="btn"
+              data-open={dlgId}
+              id={openId}
+              aria-haspopup="dialog"
+              aria-controls={dlgId}
+            >
+              Ver receta
+            </button>
+          </header>
+
+          {/* Modal nativo */}
+          <dialog id={dlgId} class="modal" aria-labelledby={`ttl-${slug}`}>
+            <form method="dialog" class="modal-header">
+              <h3 id={`ttl-${slug}`} class="text-lg font-semibold m-0">Ingredientes</h3>
+              <button class="btn-ghost" aria-label="Cerrar">✕</button>
+            </form>
+
+            <div class="modal-body">
+              <section>
+                <h4 class="section-title">Maltas</h4>
+                <ul>
+                  {maltas.length ? (
+                    maltas.map((ing, i) => (
+                      <li key={`m-${slug}-${i}`}>
+                        {ing.nombre}: {ing.cantidad_kg} kg
+                      </li>
+                    ))
+                  ) : (
+                    <li>Sin maltas definidas.</li>
+                  )}
+                </ul>
+              </section>
+
+              <section>
+                <h4 class="section-title">Adjuntos</h4>
+                <ul>
+                  {adjuntos.length ? (
+                    adjuntos.map((ing, i) => (
+                      <li key={`a-${slug}-${i}`}>
+                        {ing.nombre}
+                        {ing.cantidad_kg != null && <>: {ing.cantidad_kg} kg</>}
+                        {ing.cantidad != null && <>: {ing.cantidad} {ing.unidad ?? ""}</>}
+                      </li>
+                    ))
+                  ) : (
+                    <li>Sin adjuntos.</li>
+                  )}
+                </ul>
+              </section>
+
+              <section>
+                <h4 class="section-title">Lúpulos</h4>
+                <ul>
+                  {Array.isArray(lupulos) && lupulos.length ? (
+                    lupulos.map((ing, i) => (
+                      <li key={`l-${slug}-${i}`}>
+                        {ing.nombre}: {ing.cantidad_g} g
+                        {ing.adicion && <> · {ing.adicion}</>}
+                        {ing.tiempo_min != null && <> · {ing.tiempo_min}′</>}
+                      </li>
+                    ))
+                  ) : (
+                    <li>Sin lúpulos.</li>
+                  )}
+                </ul>
+              </section>
+
+              <section>
+                <h4 class="section-title">Levadura</h4>
+                <ul>
+                  {lev?.nombre ? (
+                    <li>
+                      {lev.nombre}
+                      {lev.cantidad != null && <>: {lev.cantidad} {lev.unidad ?? "g"}</>}
+                    </li>
+                  ) : (
+                    <li>Sin levadura definida.</li>
+                  )}
+                </ul>
+              </section>
+
+              <section>
+                <h3 class="section-title">Procesos</h3>
+                <h4 class="subtle">Macerado</h4>
+                <h4 class="subtle">Fermentación</h4>
+              </section>
+            </div>
+          </dialog>
+        </article>
+      );
+    })
+  }
+
+
+<script is:inline>
+  // Abre/cierra cada dialog por data attribute, sin dependencias
+  const opens = document.querySelectorAll('[data-open]');
+  opens.forEach(btn => {
+    const id = btn.getAttribute('data-open');
+    const dlg = document.getElementById(id);
+    if (!dlg) return;
+
+    btn.addEventListener('click', () => dlg.showModal());
+
+    // Cerrar al hacer clic fuera del cuadro (backdrop)
+    dlg.addEventListener('click', (e) => {
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        e.clientX >= rect.left && e.clientX <= rect.right &&
+        e.clientY >= rect.top && e.clientY <= rect.bottom;
+      if (!inDialog) dlg.close();
+    });
+  });
+</script>
+
+<style>
+/* Tarjetas */
+.receta-card {
+  backdrop-filter: blur(2px);
+}
+@media (601px <= width <= 1024px) {
+  .receta-card { display: block; }
+}
+@media (width >= 1025px) {
+  .receta-card { max-width: 40%; margin: auto; }
+}
+
+/* Botones básicos */
+.btn {
+  padding: .5rem .75rem;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: .5rem;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  cursor: pointer;
+}
+.btn:hover { background: #fafafa; }
+.btn-ghost {
+  border: 0; background: transparent; font-size: 1rem; cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  border: none;
+  border-radius: .75rem;
+  padding: 0;
+  max-width: 640px;
+  width: min(92vw, 640px);
+  margin: auto;
+}
+.modal::backdrop {
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .9rem 1rem; border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.modal-body {
+  padding: 1rem 1.25rem 1.25rem;
+  max-height: 70vh; overflow: auto;
+}
+.section-title { margin: 1rem 0 .25rem; font-weight: 600; }
+.subtle { font-weight: 500; opacity: .8; }
+
+/* Listas limpias */
+ul { padding-left: 1.25rem; }
+</style>

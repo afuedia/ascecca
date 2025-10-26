@@ -1,0 +1,41 @@
+---
+import PlantillaBasica from "../layouts/plantillaBasica.astro";
+const titulo = "Recetas — Asociación Canaria de Cerveceros Caseros";
+const descripcion = "Recetas de cerveza casera" 
+import CardRecetas from "../components/recetas/CardRecetas.astro";
+
+---
+
+ <!-- const { src, alt, año, estilo} -->
+<PlantillaBasica titulo={titulo} descripcion={descripcion}>
+  <hgroup>
+    <h1>Recetas</h1>
+    <p>Todas las recetas que han hecho brillar a los miembros de ASCECCA</p>
+  </hgroup>
+  
+  <section>
+    <CardRecetas />
+  </section>
+  
+
+</PlantillaBasica>
+
+<style>
+  section {
+    margin-block: 2rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    
+    @media (min-width: 601px) and (max-width: 1024px) {
+      width: 40%;
+    } 
+    @media (min-width: 1025px) {
+      flex-direction: row;
+      gap: 2rem;
+      flex-wrap: wrap;
+      
+      justify-content: center;
+    }
+  }
+</style>
