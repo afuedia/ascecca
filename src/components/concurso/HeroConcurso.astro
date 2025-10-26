@@ -4,12 +4,13 @@ const { src, alt, año, estilo} = Astro.props;
 const height = "auto"
 ---
 
+
 <section>
   <Picture src={src} alt={alt} formats={['avif', 'webp']} class="imagen"/>
   <div>
     <p>{año}</p>
     <h1>{estilo}</h1>
-    
+    <p></p>
     <a href="">Bases</a>
   </div>
 </section>
@@ -20,26 +21,65 @@ const height = "auto"
     flex-direction: column;
     @media (601px <= width <= 1024px) {
       flex-direction: row;
-    } 
+    }
     @media (width >= 1025px) {
       max-height: 80vh;
       flex-direction: row;
+
+      
     }
 
     .imagen {
+      height: auto;
       max-height: 100%;
+      object-fit: fill;
+      
     }
-    
-    
-    
-    
-    div {
+  }
+
+
+  div {
+    display: flex;
+    flex-direction: column;
+    @media (601px <= width <= 1024px) {
+      
+    }
+    @media (width >= 1025px) {
+      h1 {
+        font-size: 3rem;
+      }
+      margin: auto;
       min-width: 30%;
       text-align:  start;
       padding: 1rem;
+}
+      
     }
 
-    
 
+  a {
+    background-color: var(--color-principal);
+    color: var(--color-background);
+    display: inline-block;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    text-justify: center;
+
+    text-decoration: none;
+    border-radius: 0.25rem;
+    margin-top: 3rem;
+
+    padding: 10px 20px;
+    @media (min-width: 601px) and (max-width: 1024px) {
+      max-width: 33%;
+    }
+    /* 💻 Desktop: ≥1025px */
+    @media (min-width: 1025px) {
+      min-width: 33%;
+      max-width: 66%;
+      margin-inline: auto;
+
+    }
   }
 </style>

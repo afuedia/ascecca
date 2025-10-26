@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+const concursos = (await getCollection("concursos"))
+  .sort((a, b) => b.data.año - a.data.año)
+  .slice(1);
+  
+---
+
+  {
+    concursos.map(concurso => {
+      const {slug, data} = concurso
+      const { titulo, año, bjcp, estilo, medallas, receta, img, imgAlt } = data
+      return (
+        <article>
+          <img class="img" src={img} alt={imgAlt} />
+          <hgroup>
+            <h3>{titulo}</h3>
+            <p><time>{año}</time></p>
+          </hgroup>
+          
+          <p>{estilo}</p>
+          
+          <ul class="palmares">
+          <li>🥇 {medallas.oro}</li>
+          <li>🥈 {medallas.plata}</li>
+          <li>🥉 {medallas.bronce}</li>
+          </ul>
+        </article>
+      
+      )
+    })
+  }
+
+<style>
+  article {
+     
+    border-radius: 1rem;
+    border: solid 1px black;
+    overflow: hidden;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    @media (min-width: 601px) and (max-width: 1024px) {
+      min-width: 35%;
+      max-width: 40%;
+    } 
+    @media (min-width: 1025px) {
+      max-width: 25%;
+    }
+    .img {
+      width: 100%;
+    }
+  }
+  .palmares {
+   text-align: left;
+  }
+</style>

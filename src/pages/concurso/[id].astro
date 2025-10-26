@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import PlantillaBasica from "../../layouts/plantillaBasica.astro";
+
+import concursos from "../concursos.astro";
+export async function getStaticPaths(
+  const concursos = await getCollection('concursos')
+  return concursos.map(concurso) => ({
+    params: { id: concurso.slug },
+    props: { concurso }
+  }
+  )
+) 
+
+const { concurso } = Astro.props; 
+const { data } = concurso;
+const { titulo, año, bjcp, estilo, medallas, receta, img } = data
+---
+
+<PlantillaBasica titulo="" descripcion="" >
+
+</PlantillaBasica>

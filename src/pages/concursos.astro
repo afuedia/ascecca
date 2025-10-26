@@ -4,33 +4,48 @@ const titulo = "Concursos — Asociación Canaria de Cerveceros Caseros";
 const descripcion = "Convocatorias de concursos de cerveza casera en Canarias: bases, inscripción y fechas. Histórico de ediciones, ganadores y recetas premiadas.";
 import EventsCard from "../components/EventsCard.astro";
 import HeroConcurso from "../components/concurso/HeroConcurso.astro";
+import CardConcurso from "../components/concurso/CardConcurso.astro";
 import { Picture } from "astro:assets";
-import california from "../assets/california169.png"
+import cali from "../assets/images/california169.png"
+import saison from "../assets/images/concursos/2024.png"
 ---
-<!-- const {src, alt, titulo, fecha, ubicacion, descripcion } = Astro.props; -->
+
  <!-- const { src, alt, año, estilo} -->
 <PlantillaBasica titulo={titulo} descripcion={descripcion}>
   <!-- <h1>IX Concurso</h1> -->
-  <HeroConcurso src={california} alt="imagen bonita" año="2025" estilo="IX Concurso: California Common" />
+  <HeroConcurso src={cali} alt="imagen bonita" año="2025" estilo="IX Concurso: California Common" />
   <section>
     <h2>Antiguos concursos</h2>
+    <div>
+      <CardConcurso />
+    </div>
+    
   </section>
-  
-  
+   
 
-  <!-- <h2>2024</h2>
-  <h2>2023</h2>
-  <h2>2022</h2>
-  <h2>2021</h2>
-  <h2>2020</h2>
-  <h2>2019</h2>
-  <h2>2018</h2>
-  <h2>2017</h2>
-  <h2>2016</h2> -->
 </PlantillaBasica>
 
 <style>
   section {
+    display: flex;
+    flex-direction: column;
     margin-block: 4rem;
-  }
+    h2 {
+      margin: 2rem;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      @media (601px <= width <= 1024px) {
+      flex-direction: row;
+    }
+    @media (width >= 1025px) {
+      margin:auto;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+  }}
 </style>
