@@ -30,10 +30,3 @@
     1rem * var(--factor) * var(--factor) * var(--factor) * var(--factor)
   );
 }
-
-/* Variables cuando input está check */
-
-:root:has(#modoOscuro:checked) {
-  --color-background: #333333;
-  --color-text: #f5f5f5;
-}

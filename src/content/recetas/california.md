@@ -80,6 +80,4 @@ fermentacion:
   primaria:
     temp_c: 22
     dias: 14
-
-
 ---
