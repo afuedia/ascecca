@@ -5,12 +5,15 @@ import { ClientRouter } from "astro:transitions";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const image = "/miniatura.png"
 const {  title,  description } = Astro.props;
+
+import Favicon from "./favicon.astro";
 ---
 <head>
 <ClientRouter />
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
-
+<!-- Favicon -->
+<Favicon/>
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />

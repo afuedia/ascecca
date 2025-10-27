@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Bricolage Grotesque 96pt';
-    src: url('/fonts/BricolageGrotesque-96ptExtraBold.woff2') format('woff2'),
-        url('/fonts/BricolageGrotesque-96ptExtraBold.woff') format('woff');
+    src: url('/ascecca/fonts/BricolageGrotesque-96ptExtraBold.woff2') format('woff2'),
+        url('/ascecca/fonts/BricolageGrotesque-96ptExtraBold.woff') format('woff');
     font-weight: 200 900;
     font-style: normal;
     font-display: swap;
