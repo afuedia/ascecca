@@ -127,25 +127,38 @@ const Base = import.meta.env.BASE_URL;
 
 
 <script is:inline>
-  // Abre/cierra cada dialog por data attribute, sin dependencias
-  const opens = document.querySelectorAll('[data-open]');
-  opens.forEach(btn => {
-    const id = btn.getAttribute('data-open');
-    const dlg = document.getElementById(id);
-    if (!dlg) return;
+  // Delegación: funciona tras cada navegación del ClientRouter
+  document.addEventListener('click', (e) => {
+    // 1) Abrir: botón con data-open="id-del-dialog"
+    const openBtn = e.target.closest('[data-open]');
+    if (openBtn) {
+      const id = openBtn.getAttribute('data-open');
+      const dlg = document.getElementById(id);
+      if (dlg?.showModal) dlg.showModal();
+      return;
+    }
 
-    btn.addEventListener('click', () => dlg.showModal());
+    // 2) Cerrar explícito: [data-close] dentro del dialog
+    const closeBtn = e.target.closest('[data-close]');
+    if (closeBtn) {
+      closeBtn.closest('dialog')?.close();
+      return;
+    }
 
-    // Cerrar al hacer clic fuera del cuadro (backdrop)
-    dlg.addEventListener('click', (e) => {
+    // 3) Cerrar por clic en backdrop:
+    // si el target del click es el propio <dialog> (no sus hijos),
+    // entonces fue fuera de la caja
+    const dlg = e.target.nodeName === 'DIALOG' ? e.target : null;
+    if (dlg && dlg.open) {
       const rect = dlg.getBoundingClientRect();
       const inDialog =
         e.clientX >= rect.left && e.clientX <= rect.right &&
-        e.clientY >= rect.top && e.clientY <= rect.bottom;
+        e.clientY >= rect.top  && e.clientY <= rect.bottom;
       if (!inDialog) dlg.close();
-    });
+    }
   });
 </script>
+
 
 <style>
 /* Tarjetas */
