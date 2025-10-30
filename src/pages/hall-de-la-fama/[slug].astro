@@ -1,0 +1,14 @@
+---
+// src/pages/hall-de-la-fama/[slug].astro
+export async function getStaticPaths() {
+  // sin contenido por ahora:
+  return []; // no se generará ninguna página /hall-de-la-fama/...
+}
+const { entry } = Astro.props ?? {};
+---
+<html>
+  <body>
+    <h1>Hall de la fama</h1>
+    <!-- contenido condicional si 'entry' existiera -->
+  </body>
+</html>
